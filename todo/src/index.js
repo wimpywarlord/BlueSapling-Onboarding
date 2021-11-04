@@ -1,40 +1,17 @@
-import React, { Component } from 'react'
-export default class TodoList extends Component {
-  state = {
-    todos: [
-      { Id: '1', Title: 'Push your code to github', Status: 'Done' },
-      { Id: '2', Title: 'Email to your manager', Status: 'Pending' },
-    ],
-  }
-  render() {
-    return (
-      <div>
-        <h1>TodoList </h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Title</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.todos.map((x) => {
-              return (
-                <tr key={x.Id}>
-                  <td>{x.Id}</td>
-                  <td>{x.Title}</td>
-                  <td>{x.Status}</td>
-                  <td>
-                    <button>Delete</button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
-}
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
