@@ -6,11 +6,17 @@ export default class TodoList extends Component {
       { Id: '2', Title: 'Email to your manager', Status: 'Pending' },
     ],
   }
+  deleteToDo = (todo) => {
+    const filteredItems = this.state.todos.filter((x) => x.Id !== todo.Id)
+    this.setState({
+      todos: filteredItems,
+    })
+  }
   render() {
     return (
       <div>
         <h1>TodoList </h1>
-        <table>
+        <table class="table">
           <thead>
             <tr>
               <th>Id</th>
@@ -27,7 +33,14 @@ export default class TodoList extends Component {
                   <td>{x.Title}</td>
                   <td>{x.Status}</td>
                   <td>
-                    <button>Delete</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => this.deleteToDo(x)}
+                    >
+                      Delete
+                    </button>
+                    <span> </span>
+                    <button className="btn btn-primary">Edit</button>
                   </td>
                 </tr>
               )
