@@ -4,7 +4,7 @@
   "description": "Example application for Introduction to APIs",
   "main": "app.js",
   "scripts": {
-    "start": "cp -u .env.example .env && node app.js",
+    "start": "copy .env.example .env && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^8.1.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "twilio": "^3.71.1"
   }
 }
