@@ -4,8 +4,8 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
 
-const accountSid = 'AC9cd2e8a41c99e1cd9e2db9127397c965'
-const authToken = '8709990197fb02d2f3667812643517f9'
+let accountSid = process.env.TWILIO_ACCOUNT_SID
+let authToken = process.env.TWILIO_AUTH_TOKEN
 const client = require('twilio')(accountSid, authToken)
 
 // This is a single page application and it's all rendered in public/index.html
