@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import DayCard from './DayCard';
-import axios from "axios";
+// import axios from "axios";
 import DegreeToggle from './DegreeToggle';
+import { connect } from 'react-redux';
 
+import {fetchWeather} from "./redux/weather/weatherActions"
 
 class WeekContainer extends Component {
 
@@ -21,19 +23,23 @@ class WeekContainer extends Component {
 
   componentDidMount()
   {
-    var key = require("./apikey");
+    this.props.fetchWeather();
+    console.log("INSIDE DID MOUNT")
+    console.log(this.props)
+
+    // var key = require("./apikey");
     // console.log(key.apikey)
-    const api_endpoint = `http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${key.apikey}`
-    ;
-    // console.log(api_endpoint)
-    axios.get(api_endpoint).then((response) => {
-      // console.log(response)
-      const dailyData = response.data.list.filter(reading => reading.dt_txt.includes("18:00:00"));
-      this.setState({
-        fullData: response.data.list,
-        dailyData: dailyData
-      }, () => console.log(this.state));
-    });
+    // const api_endpoint = `http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${key.apikey}`
+    // ;
+    // // console.log(api_endpoint)
+    // axios.get(api_endpoint).then((response) => {
+    //   // console.log(response)
+    //   const dailyData = response.data.list.filter(reading => reading.dt_txt.includes("18:00:00"));
+    //   this.setState({
+    //     fullData: response.data.list,
+    //     dailyData: dailyData
+    //   }, () => console.log(this.state));
+    // });
     // fetch(api_endpoint)
     // .then(res => res.json())
     // .then(data => {
@@ -67,4 +73,20 @@ class WeekContainer extends Component {
   }
 }
 
-export default WeekContainer;
+// RECIEVES A REDUX STATE AS PARAM
+// COMPONENT WILL RECIEVE ADDITIONAL PROPS NAMED DATA
+// THIS DATA CONTAINS info FROM REDUX STATE
+const mapStateToProps = state => {
+  return {
+    data : state.data,
+  }
+}
+
+// WILL MATCH THE ACTION CREATOR TO OUR PROP
+const mapDispatchToProps = dispatch  => {
+  return {
+    fetchWeather: () => dispatch(fetchWeather())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (WeekContainer);
