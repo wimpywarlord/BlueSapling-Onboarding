@@ -22,10 +22,10 @@ class WeekContainer extends Component {
   }
 
   componentDidMount()
-  {
+  {    
+    console.log("COMPONENT DID MOUNT TRIGGERED")
     this.props.fetchWeather();
-    console.log("INSIDE DID MOUNT")
-    console.log(this.props)
+    console.log(this.props, "$")
 
     // var key = require("./apikey");
     // console.log(key.apikey)
@@ -54,7 +54,12 @@ class WeekContainer extends Component {
 
   }
   formatDayCards = () => {
-    return this.state.dailyData.map((reading, index) => <DayCard degreeType={this.state.degreeType} reading={reading} key={index} />)
+    if (this.props.data) {
+      return this.props.data.map((reading, index) => <DayCard degreeType={this.state.degreeType} reading={reading} key={index} />)  
+    } else {
+      return "LOADING"
+    }
+    
   }
   render()
   {
@@ -77,6 +82,7 @@ class WeekContainer extends Component {
 // COMPONENT WILL RECIEVE ADDITIONAL PROPS NAMED DATA
 // THIS DATA CONTAINS info FROM REDUX STATE
 const mapStateToProps = state => {
+  console.log("MAP STATE TO PROPS TRIGGERED")
   return {
     data : state.data,
   }
@@ -84,6 +90,7 @@ const mapStateToProps = state => {
 
 // WILL MATCH THE ACTION CREATOR TO OUR PROP
 const mapDispatchToProps = dispatch  => {
+  console.log("MAP DISPATCH TO PROPS TRIGGERED")
   return {
     fetchWeather: () => dispatch(fetchWeather())
   }
