@@ -8,6 +8,7 @@ export const weather = (data) => {
   }
 }
 
+// ASYNC FETCHING USING REDUX THUNK
 export const fetchWeather = () => {
   console.log("FETCH WEATHER ACTION CREATOR TRIGGERED")
   return (dispatch) => {
