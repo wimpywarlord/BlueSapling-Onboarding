@@ -4,8 +4,6 @@ import DayCard from './DayCard';
 import DegreeToggle from './DegreeToggle';
 import { connect } from 'react-redux';
 
-import {fetchWeather} from "./redux/weather/weatherActions"
-
 class WeekContainer extends Component {
 
   state = {
@@ -83,6 +81,7 @@ class WeekContainer extends Component {
 // THIS DATA CONTAINS info FROM REDUX STATE
 const mapStateToProps = state => {
   console.log("MAP STATE TO PROPS TRIGGERED")
+  console.log(state)
   return {
     data : state.data,
   }
@@ -92,7 +91,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch  => {
   console.log("MAP DISPATCH TO PROPS TRIGGERED")
   return {
-    fetchWeather: () => dispatch(fetchWeather())
+    fetchWeather: () => dispatch({type: "SHOW_WEATHER_ASYNC"})
   }
 }
 
