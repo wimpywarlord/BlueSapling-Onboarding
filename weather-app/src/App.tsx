@@ -4,7 +4,8 @@ import WeekContainer from './WeekContainer'
 import About from "./About"
 import Home from "./Home"
 
-import {BrowserRouter as Router, Route, } from 'react-router-dom'
+// @ts-ignore
+import {BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 function App() {

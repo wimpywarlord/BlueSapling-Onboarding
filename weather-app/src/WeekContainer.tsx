@@ -1,22 +1,35 @@
-import React, { Component } from 'react';
+import React, { Component, ChangeEvent } from 'react';
 import DayCard from './DayCard';
+// import NewDayCard from './NewDayCard';
 // import axios from "axios";
 import DegreeToggle from './DegreeToggle';
 import { connect } from 'react-redux';
 
-class WeekContainer extends Component {
+interface Props {
+  data ?: {}[],
+  fetchWeather ():{},
+}
 
-  state = {
+interface ILocalState {
+  fullData : [],
+  dailyData : [],
+  degreeType : string,
+}
+
+class WeekContainer extends Component < Props, any>{
+
+  state : ILocalState = {
     fullData: [],
     dailyData: [],
     degreeType: "fahrenheit"
   }
 
-  updateForecastDegree = event => {
+  updateForecastDegree = (event: ChangeEvent<HTMLInputElement>):void  => {
     // console.log(event)
+    console.log("UPDATE FORECAST DEGREE METHOD IN PARENT WEEK CONTANIER TRIGGERED")
     this.setState({
       degreeType: event.target.value
-    }, () => console.log(this.state))
+    }, () => console.log(this.state, "asda"))
   }
 
   componentDidMount()
@@ -52,12 +65,19 @@ class WeekContainer extends Component {
 
   }
   formatDayCards = () => {
+    console.log(this.props)
     if (this.props.data) {
-      return this.props.data.map((reading, index) => <DayCard degreeType={this.state.degreeType} reading={reading} key={index} />)  
+      // return <NewDayCard />
+      return this.props.data.map((reading ,index) => {
+      console.log(reading, "%%%%?%");
+      // return <NewDayCard />
+      return <DayCard degreeType={this.state.degreeType} reading={reading} key={index} />
+      // console.log("POST NEW CARD RENDER");
+    })  
+    
     } else {
       return "LOADING"
     }
-    
   }
   render()
   {
@@ -79,7 +99,10 @@ class WeekContainer extends Component {
 // RECIEVES A REDUX STATE AS PARAM
 // COMPONENT WILL RECIEVE ADDITIONAL PROPS NAMED DATA
 // THIS DATA CONTAINS info FROM REDUX STATE
-const mapStateToProps = state => {
+interface IState {
+  data ?: {}[]
+}
+const mapStateToProps = (state : IState) => {
   console.log("MAP STATE TO PROPS TRIGGERED")
   console.log(state)
   return {
@@ -88,7 +111,7 @@ const mapStateToProps = state => {
 }
 
 // WILL MATCH THE ACTION CREATOR TO OUR PROP
-const mapDispatchToProps = dispatch  => {
+const mapDispatchToProps = (dispatch : any)  => {
   console.log("MAP DISPATCH TO PROPS TRIGGERED")
   return {
     fetchWeather: () => dispatch({type: "SHOW_WEATHER_ASYNC"})

@@ -31,16 +31,18 @@ import { put, takeEvery, all } from 'redux-saga/effects'
 
 function* weatherAsync() {
   console.log("ASYNC CALL SAGA ACTION TRIGGERED")
-  var key = require("../../apikey");
-  const api_endpoint = `http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${key.apikey}`;
+  var key = require("../../apikey.tsx");
+  console.log(key.default) 
+  const api_endpoint = `http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${key.default}`;
   console.log(api_endpoint)
     // console.log(api_endpoint)
   let dailyData;
   yield axios.get(api_endpoint).then( async (response) => {
       // console.log(response)
-      dailyData =  await response.data.list.filter(reading => reading.dt_txt.includes("18:00:00"));
+      dailyData =  await response.data.list.filter((reading: { dt_txt: string | string[]; }) => reading.dt_txt.includes("18:00:00"));
       // console.log(dailyData);
     });
+  console.log(dailyData)
   yield put({ type: 'SHOW_WEATHER', payload: dailyData })
   
 }

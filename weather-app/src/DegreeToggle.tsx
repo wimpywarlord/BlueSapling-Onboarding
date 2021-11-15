@@ -1,6 +1,9 @@
 import React from 'react'
 
-const DegreeToggle = ({ degreeType, updateForecastDegree }) => {
+const DegreeToggle = ( degreeType : any, updateForecastDegree : any ) => {
+  console.log("DEGREE TOGGLE COMPONENT RENDERED");
+  // console.log(degreeType);
+  // console.log(degreeType.updateForecastDegree);
   return (
     <React.Fragment>
       <div className="form-check form-check-inline">
@@ -10,8 +13,8 @@ const DegreeToggle = ({ degreeType, updateForecastDegree }) => {
           name="degree-type"
           id="celsius"
           value="celsius"
-          defaultChecked={degreeType === 'celsius'}
-          onChange={updateForecastDegree}
+          defaultChecked={degreeType.degreeType === 'celsius'}
+          onChange={degreeType.updateForecastDegree}
         />
         <label className="form-check-label">Celsius</label>
       </div>
@@ -22,8 +25,8 @@ const DegreeToggle = ({ degreeType, updateForecastDegree }) => {
           name="degree-type"
           id="farenheit"
           value="fahrenheit"
-          defaultChecked={degreeType === 'fahrenheit'}
-          onChange={updateForecastDegree}
+          defaultChecked={degreeType.degreeType === 'fahrenheit'}
+          onChange={degreeType.updateForecastDegree}
         />
         <label className="form-check-label">Farenheit</label>
       </div>
